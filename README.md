@@ -1,65 +1,71 @@
-# Flight On Time BFF
+# ✈️ Flight On Time BFF
 
-## Descripción
+> 🏆 **Proyecto desarrollado durante el Hackathon ONE - Alura Latam & No Country (Enero 2025)**
 
-**Flight On Time BFF** (Backend for Frontend) es una API REST desarrollada con Spring Boot que actúa como intermediaria entre las interfaces de cliente (Frontend) y los servicios del núcleo (Core Services). Su principal función es gestionar las solicitudes de predicción de puntualidad de vuelos, validando los datos de entrada y orquestando la comunicación con el servicio de predicción.
+[![Java](https://img.shields.io/badge/Java-17-orange)](https://www.oracle.com/java/)
+[![Spring Boot](https://img.shields.io/badge/Spring%20Boot-3.x-green)](https://spring.io/projects/spring-boot)
 
-Este proyecto sigue una arquitectura limpia y modular, facilitando el mantenimiento y la escalabilidad.
+Backend for Frontend (BFF) que actúa como intermediario entre las interfaces de cliente y los servicios del núcleo. Gestiona las solicitudes de predicción de puntualidad de vuelos, validando datos y orquestando la comunicación con el servicio de predicción.
 
-## Características
+---
 
-*   **API RESTful**: Exposición de endpoints claros y estandarizados.
-*   **Predicción de Puntualidad**: Endpoint específico `/predict` para evaluar la probabilidad de que un vuelo llegue a tiempo.
-*   **Validación de Datos**: Validación robusta de entradas utilizando Bean Validation (Jakarta Validation) para asegurar la integridad de los datos antes de procesarlos.
-*   **Cliente HTTP Declarativo**: Comunicación eficiente con servicios externos.
-*   **Arquitectura Modular**: Separación de responsabilidades en Controladores, Servicios y DTOs.
+## 📋 Descripción
 
-## Stack Tecnológico
+**Flight On Time BFF** es una API REST desarrollada con Spring Boot que facilita la comunicación entre el frontend y el servicio Core de predicción de vuelos. Implementa validación de datos, transformación de requests y manejo de respuestas de forma eficiente.
 
-*   **Java**: 17
-*   **Framework**: Spring Boot 3.x
-*   **Gestor de Dependencias**: Maven
-*   **Otras Librerías**:
-    *   Lombok (para reducir código repetitivo)
-    *   Spring Boot Starter Validation
+---
 
-## Prerrequisitos
+## 🚀 Mi Contribución al Proyecto
 
-Asegúrate de tener instaladas las siguientes herramientas en tu entorno local:
+Como **Backend Developer** en este proyecto, mis responsabilidades incluyeron:
 
-*   [Java Development Kit (JDK) 17](https://adoptium.net/)
-*   [Apache Maven](https://maven.apache.org/download.cgi)
+- ✅ **Desarrollo de API REST** con endpoints claros y estandarizados
+- ✅ **Validación de datos** robusta utilizando Bean Validation (Jakarta Validation)
+- ✅ **Orquestación de servicios** para comunicación eficiente con el Core
+- ✅ **Arquitectura modular** con separación de responsabilidades
+- ✅ **Manejo de errores** y respuestas HTTP apropiadas
 
-## Instalación
+---
 
-1.  **Clonar el repositorio:**
+## 💻 Tecnologías Utilizadas
 
-    ```bash
-    git clone 
-    cd flight-on-time-bff
-    ```
+### Backend
+- **Java 17**: Lenguaje principal
+- **Spring Boot 3.x**: Framework principal
+- **Spring Boot Starter Validation**: Validación de datos
+- **Lombok**: Reducción de código repetitivo
 
-2.  **Compilar el proyecto:**
+### Herramientas
+- **Maven**: Gestión de dependencias
+- **RestTemplate/WebClient**: Cliente HTTP para comunicación con servicios
 
-    ```bash
-    mvn clean install
-    ```
+---
 
-## Configuración
+## 🛠️ Instalación y Configuración
 
-El archivo de configuración principal se encuentra en `src/main/resources/application.properties`.
+### Prerrequisitos
 
-| Propiedad | Valor por Defecto | Descripción |
-| :--- | :--- | :--- |
-| `server.port` | `8080` | Puerto donde se ejecuta el servidor BFF. |
-| `spring.application.name` | `bff-service` | Nombre de la aplicación. |
-| `core.service.url` | `http://localhost:8081` | URL base del servicio Core de predicción. |
+- JDK 17 instalado
+- Maven instalado
+- Servicio Core corriendo en `http://localhost:8081`
 
-Puedes modificar estos valores según tu entorno.
+### Configuración
 
-## Ejecución
+El archivo `application.properties` contiene:
 
-Para iniciar la aplicación, ejecuta el siguiente comando en la raíz del proyecto:
+```properties
+server.port=8080
+spring.application.name=bff-service
+core.service.url=http://localhost:8081
+```
+
+### Construcción
+
+```bash
+mvn clean install
+```
+
+### Ejecución
 
 ```bash
 mvn spring-boot:run
@@ -67,47 +73,31 @@ mvn spring-boot:run
 
 La aplicación estará disponible en `http://localhost:8080`.
 
-## Uso del API
+---
+
+## 🔌 Uso del API
 
 ### Predicción de Vuelo
 
 Evalúa la probabilidad de puntualidad de un vuelo.
 
-*   **Endpoint:** `POST /predict`
-*   **Content-Type:** `application/json`
+**Endpoint:** `POST /predict`
 
-#### Estructura del Request (JSON)
+**Content-Type:** `application/json`
 
-| Campo | Tipo | Requerido | Descripción |
-| :--- | :--- | :--- | :--- |
-| `aerolinea` | String | Sí | Nombre de la aerolínea. |
-| `origen` | String | Sí | Código o nombre del aeropuerto de origen. |
-| `destino` | String | Sí | Código o nombre del aeropuerto de destino. |
-| `fecha_partida` | String | Sí | Fecha y hora de partida en formato ISO-8601 (`YYYY-MM-DDTHH:mm:ss`). |
-| `distancia_km` | Number | Sí | Distancia del vuelo en kilómetros. |
+#### Request Body
 
-#### Ejemplo de Solicitud (cURL)
-
-```bash
-curl -X POST http://localhost:8080/predict \
-     -H "Content-Type: application/json" \
-     -d '{
-           "aerolinea": "AA",
-           "origen": "JFK",
-           "destino": "LAX",
-           "fecha_partida": "2023-12-25T08:00:00",
-           "distancia_km": 3980.5
-         }'
+```json
+{
+  "aerolinea": "AA",
+  "origen": "JFK",
+  "destino": "LAX",
+  "fecha_partida": "2023-12-25T08:00:00",
+  "distancia_km": 3980.5
+}
 ```
 
-#### Estructura de Respuesta (JSON)
-
-| Campo | Tipo | Descripción |
-| :--- | :--- | :--- |
-| `prevision` | String | Resultado de la predicción (ej. "A tiempo", "Retrasado"). |
-| `probabilidad` | Number | Valor numérico entre 0 y 1 indicando la confianza de la predicción. |
-
-#### Ejemplo de Respuesta Exitosa (200 OK)
+#### Response (200 OK)
 
 ```json
 {
@@ -116,9 +106,7 @@ curl -X POST http://localhost:8080/predict \
 }
 ```
 
-#### Ejemplo de Respuesta de Error (400 Bad Request)
-
-Si falta algún campo obligatorio o el formato es incorrecto:
+#### Response (400 Bad Request)
 
 ```json
 {
@@ -129,13 +117,61 @@ Si falta algún campo obligatorio o el formato es incorrecto:
 }
 ```
 
-## Estructura del Proyecto
+---
+
+## 📂 Estructura del Proyecto
 
 ```
 src/main/java/com/flightontime/bff
 ├── BffApplication.java          # Clase principal de entrada
-├── config/                      # Clases de configuración (Beans, Properties)
+├── config/                      # Configuración (Beans, Properties)
 ├── controller/                  # Controladores REST (Endpoints)
-├── dto/                         # Data Transfer Objects (Request/Response)
+├── dto/                         # Data Transfer Objects
 └── service/                     # Lógica de negocio y clientes externos
 ```
+
+---
+
+## 🔄 Flujo de Trabajo
+
+1. **Cliente** envía request al BFF (`/predict`)
+2. **BFF** valida los datos de entrada
+3. **BFF** transforma el request si es necesario
+4. **BFF** envía request al servicio Core
+5. **Core** procesa con el modelo de IA
+6. **BFF** recibe respuesta del Core
+7. **BFF** transforma y retorna respuesta al cliente
+
+---
+
+## 👥 Equipo de Desarrollo
+
+Este proyecto fue desarrollado colaborativamente durante el Hackathon ONE:
+
+- **Luisa Valencia** - Líder del proyecto
+- **Edwin Mancilla** - Backend Developer (Java/Spring Boot)
+- **Marco Hernández** - Colaborador
+- **Eliana Méndez** - Colaboradora
+- Y más colaboradores
+
+---
+
+## 🔗 Repositorio Original
+
+Este es un fork del proyecto original desarrollado durante el hackathon:
+- **Repositorio original**: [luvalenciaq/flight-on-time-bff](https://github.com/luvalenciaq/flight-on-time-bff)
+
+---
+
+## 📫 Contacto
+
+**Edwin Javier Mancilla Rios**
+- 📧 Email: edwinmancilla1017@gmail.com
+- 💼 LinkedIn: [linkedin.com/in/edwin-mancilla-rios-79b051346](https://www.linkedin.com/in/edwin-mancilla-rios-79b051346/)
+- 🐙 GitHub: [github.com/EdwinMancilla](https://github.com/EdwinMancilla)
+
+---
+
+## 📄 Licencia
+
+Este proyecto fue desarrollado con fines educativos durante el Hackathon ONE de Alura Latam & No Country.
